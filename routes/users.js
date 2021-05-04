@@ -25,6 +25,7 @@ router.post('/new', function(req, res) {
     if (err) throw err;
     res.json({
       status: 201,
+      data,
       message: "New user added successfully"
     })
   })
@@ -32,9 +33,9 @@ router.post('/new', function(req, res) {
 
 //delete user exist
 router.delete('/del/:id', (req, res) => {
-    let sql = 'DELETE FROM USERs WHERE ID ?';
-    let values = req.par.id;
-    db.query(sql, values, function(err, data, fields) {
+    let id = req.params.id;
+    let sql = 'DELETE FROM USERs WHERE ID = ?';
+    db.query(sql, id , function(err, data, fields) {
         if (err) throw err;
         res.json({
           status: 204,
